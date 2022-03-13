@@ -1,0 +1,29 @@
+---
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=0
+builds:
+  - id: one
+    dir: lambda/one
+    goos:
+      - linux
+    goarch:
+      - amd64
+    # no_unique_dist_dir: true
+  - id: two
+    dir: lambda/two
+    goos:
+      - linux
+    goarch:
+      - amd64
+    # no_unique_dist_dir: true
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
